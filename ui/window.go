@@ -20,21 +20,18 @@ func NewWindow(width int, height int, title string) *Window {
 	return &Window{int32(width), int32(height), title, surf, []Component{}}
 }
 
-func (w *Window) Add(comp Component) *Component {
+func (w *Window) Add(comp Component) {
 	w.Components = append(w.Components, comp)
 	w.SetDirty()
-	return &comp
 }
 
-func (w *Window) Remove(comp Component) *Window {
+func (w *Window) Remove(comp Component) {
 	defer func() { w.SetDirty() }()
 	for i, v := range w.Components {
 		if v == comp {
 			w.Components = append(w.Components[:i], w.Components[i+1:]...)
-			return w
 		}
 	}
-	return w
 }
 
 func (w *Window) SetDirty() {

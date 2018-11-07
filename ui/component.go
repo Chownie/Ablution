@@ -13,7 +13,7 @@ type Component interface {
 	Size() *sdl.Rect
 	Bounds() *sdl.Rect
 	Contains(int32, int32) bool
-	SetParent(*Window)
+	SetParent(Container)
 	SetDirty()
 	Register(Event, func(EventData))
 	Trigger(Event, EventData) bool

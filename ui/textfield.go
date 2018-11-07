@@ -10,7 +10,7 @@ import (
 
 type TextField struct {
 	text            string
-	parent          *Window
+	parent          Container
 	internalSurface *sdl.Surface
 	Multiline       bool
 	font            *ttf.Font
@@ -103,8 +103,8 @@ func (tx *TextField) Bounds() *sdl.Rect {
 	return &sdl.Rect{tx.X, tx.Y, tx.internalSurface.W, tx.internalSurface.H}
 }
 
-func (tx *TextField) SetParent(win *Window) {
-	tx.parent = win
+func (tx *TextField) SetParent(container Container) {
+	tx.parent = container
 }
 
 func (tx *TextField) SetDirty() {

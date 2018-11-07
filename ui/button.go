@@ -7,7 +7,7 @@ import (
 
 type Button struct {
 	text            string
-	parent          *Window
+	parent          Container
 	font            *ttf.Font
 	internalSurface *sdl.Surface
 	slicedTexture   *sdl.Surface
@@ -41,8 +41,8 @@ func (b *Button) SetText(input string) {
 	b.SetDirty()
 }
 
-func (b *Button) SetParent(window *Window) {
-	b.parent = window
+func (b *Button) SetParent(container Container) {
+	b.parent = container
 	b.SetDirty()
 }
 
