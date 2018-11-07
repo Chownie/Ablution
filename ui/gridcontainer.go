@@ -6,9 +6,8 @@ import (
 
 type GridContainer struct {
 	internalSurface *sdl.Surface
-	Components      []Component
 	*EventManager
-	*Transform
+	*BaseContainer
 }
 
 func NewGridContainer(x int, y int, width int, height int) *GridContainer {
@@ -16,19 +15,18 @@ func NewGridContainer(x int, y int, width int, height int) *GridContainer {
 	if err != nil {
 		panic(err)
 	}
-	return &GridContainer{surf, []Component{}, NewEventManager(), NewTransform(x, y, width, height, true)}
-}
-
-func (g *GridContainer) Add(Component) {
-
-}
-
-func (g *GridContainer) Remove(Component) {
-
+	return &GridContainer{surf, NewEventManager(), NewBaseContainer(x, y, width, height, false)}
 }
 
 func (g *GridContainer) SetDirty() {
-
+	err := g.internalSurface.FillRect(&sdl.Rect{int32(0), int32(0),
+		g.internalSurface.W, g.internalSurface.H}, 0xffffffff)
+	if err != nil {
+		panic(err)
+	}
+	for _, component := range g.Components {
+		component.Render().Blit(component.Size(), g.internalSurface, component.Bounds())
+	}
 }
 
 func (g *GridContainer) Render() *sdl.Surface {

@@ -14,6 +14,7 @@ const (
 	DeselectEvent
 	TextEvent
 	TextEditEvent
+	TickEvent
 )
 
 type EventData struct {

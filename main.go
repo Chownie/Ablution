@@ -13,14 +13,18 @@ func main() {
 	button.Register(ui.ButtonEvent, func(ev ui.EventData) {
 		fmt.Println("main", window)
 	})
-	textfield := ui.NewTextField(96, 0, "Placeholder", true, `Font/UbuntuMono-R.ttf`, 14)
-	textfield.SetRange(40, 200, 40, 100)
-	button2 := ui.NewButton(48, 0, "Clear", `PNG\blue_button06.png`, `Font/UbuntuMono-R.ttf`, 12)
+
+	container := ui.NewBaseContainer(80, 0, 100, 50, true)
+	textfield := ui.NewTextField(0, 0, "Placeholder", true, `Font/UbuntuMono-R.ttf`, 14)
+	textfield.SetRange(40, 100, 0, 50)
+	button2 := ui.NewButton(0, 0, "Clear", `PNG\blue_button06.png`, `Font/UbuntuMono-R.ttf`, 12)
 	button2.Register(ui.ButtonEvent, func(ev ui.EventData) {
 		textfield.SetText("")
 	})
+
 	window.Add(button)
-	window.Add(button2)
-	window.Add(textfield)
+	container.Add(button2)
+	container.Add(textfield)
+	window.Add(container)
 	fmt.Println(ui.Run(window))
 }
